@@ -32,6 +32,7 @@ function getSongs() {
         var $li = $('<li></li>');
         $li.append('<p>' + song.title + '</p>');
         $li.append('<p>by: ' + song.artist + '</p>');
+        $li.append('<h5>Added on: ' + song.dateAdded + '</h5>');
         $('#songs').append($li);
       });
     }
