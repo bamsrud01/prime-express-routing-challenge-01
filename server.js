@@ -53,6 +53,8 @@ var songs = [];         //  This array will hold whatever songs are created
 app.post('/songs', function(req, res){
   console.log('req.body:', req.body);
 
+  //  Add a dateAdded property to the song element
+  req.body.dateAdded = new Date().toString();
   //  Search songs array for matching title AND artist
   var unique = true;
   for (var i = 0; i < songs.length; i++) {
