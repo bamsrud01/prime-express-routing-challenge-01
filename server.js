@@ -14,7 +14,7 @@ var app = express();    //  This is a common expression when using express
 
 //  Middleware function, gets executed on each request
 app.use(function(req, res, next){
-  console.log('Got a request!');
+  // console.log('Got a request!');
   next();
 });
 
@@ -51,7 +51,6 @@ app.get('/kittens', function(req, res){
 var songs = [];         //  This array will hold whatever songs are created
 
 app.post('/songs', function(req, res){
-  console.log('req.body:', req.body);
 
   //  Add a dateAdded property to the song element
   req.body.dateAdded = new Date().toString();
@@ -59,7 +58,10 @@ app.post('/songs', function(req, res){
   var unique = true;
   for (var i = 0; i < songs.length; i++) {
     if (req.body.title.toLowerCase() == songs[i].title.toLowerCase() && req.body.artist.toLowerCase() == songs[i].artist.toLowerCase()) {
+      // I attempted to add an error message using alert, but it was not successful.
+      //alert('ERROR: The song already exists.  Please try another.');
       unique = false;
+      res.sendStatus(400);
     }
   }
   //  The song will only be added to the array if it was unique.
@@ -67,7 +69,6 @@ app.post('/songs', function(req, res){
     songs.push(req.body);
   }
 
-  console.log('songs', songs);
   res.sendStatus(200);
 });
 
