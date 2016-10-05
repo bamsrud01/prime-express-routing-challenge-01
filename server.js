@@ -52,7 +52,19 @@ var songs = [];         //  This array will hold whatever songs are created
 
 app.post('/songs', function(req, res){
   console.log('req.body:', req.body);
-  songs.push(req.body);
+
+  //  Search songs array for matching title AND artist
+  var unique = true;
+  for (var i = 0; i < songs.length; i++) {
+    if (req.body.title.toLowerCase() == songs[i].title.toLowerCase() && req.body.artist.toLowerCase() == songs[i].artist.toLowerCase()) {
+      unique = false;
+    }
+  }
+  //  The song will only be added to the array if it was unique.
+  if (unique) {
+    songs.push(req.body);
+  }
+
   console.log('songs', songs);
   res.sendStatus(200);
 });
